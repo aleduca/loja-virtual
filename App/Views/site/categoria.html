@@ -1,0 +1,49 @@
+{% extends 'layout.html' %}
+{% block site %}
+    <div class="wrap-title-black round">
+        <h1 class="nice-title">PRODUTOS DA CATEGORIA: {{ categoria.categoria_nome }}</h1>
+    </div>
+    <ul id="block-product-list">
+        {% if produtos | length <= 0 %}
+            <h3>Nenhum produto encontrado nessa categoria</h3>
+        {% endif %}
+        
+        {% set i = 0 %}
+        {% for produto in produtos %}
+            {% if i % 3 == 1%}
+                {% set class = 'middle' %}
+            {% else %}
+                {% set class = '' %}
+            {% endif %}
+            <li class="{{ class }}">
+                <div class="product-name">
+                    <h2><a href="#">{{ produto.produto_nome }}</a> / <a href="#">{{ produto.categoria_nome }}</a></h2>
+                </div>
+                <div class="product-photo"><a href="#"><img src="/{{ produto.produto_foto }}" alt="" /></a></div>
+                <div class="product-info">
+                    <div class="first-row">
+                        {% if produto.produto_promocao == 1 %}
+                            <div class="oldprice">Price: <span>R$ {{ produto.produto_valor | number_format(2,',','.') }}</span></div>
+                        {% endif %}
+                        <div class="details"><a href="#">Detalhes</a></div>
+                    </div>
+                    <div class="second-row">
+                        {% if produto.produto_promocao == 1 %}
+                            <div class="price">R$ {{ produto.produto_valor_promocao | number_format(2,',','.') }}</div>
+                        {% else %}
+                            <div class="price">R$ {{ produto.produto_valor | number_format(2,',','.') }}</div>
+                        {% endif %}
+                        <div class="addcart"><a class="nice-a" href="#">COMPRAR</a></div>
+                    </div>
+                </div>
+            </li>
+            {% set i = i+1 %}
+        {% endfor %}
+    </ul>
+    <div id="wrap-pages" class="round">
+        <div class="left">{{ info }}</div>
+        <div class="right">
+            {{ links | raw }}
+        </div>
+    </div>
+{% endblock %}

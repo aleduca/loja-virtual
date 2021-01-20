@@ -1,0 +1,26 @@
+<div id="wrap-categories">
+    <div class="wrap-title-black">
+        <h2 class="nice-title">CATEGORIAS</h2>
+        <div class="expanded"></div>
+    </div>
+    <ul id="category-menu">
+        {% for categoria in categorias() %}
+        <li><a href="/categoria/show/{{ categoria.categoria_slug }}">{{ categoria.categoria_nome }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+<div class="left-block">
+    <h2 class="nice-title2">NEWSLETTER</h2>
+    <div class="block-content">
+        <form id="newsletter-form" action="" method="post">
+            <p class="info">Coloque seu email abaixo para receber as últimas notícias da loja asw</p>
+            <p><input id="newsletter-value" class="nice-i" type="text" name="newsletter-email" value="Seu email aqui..." /></p>
+            <p><input class="nice-s" type="submit" name="newsletter-submit" value="SUBMIT" /></p>
+        </form>
+    </div>
+</div>
+<div class="left-block">
+    <div class="block-content2">
+        <img src="/assets/images/site/paypal-cards.jpg" alt="paypal cards" />
+    </div>
+</div>

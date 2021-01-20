@@ -1,0 +1,42 @@
+{% extends 'layout_admin.html' %}
+{% block admin_content %}
+
+    <h2>Lista de produtos em estoque</h2>
+    <div class="btn-group">
+        <a class="btn btn-default" href="#" role="button">Início</a>
+    </div>
+    <div>
+        <form action="/adminEstoque">
+            <input type="text" name="s"  class="form-control" placeholder="Buscar Produto">
+        </form>
+    </div>
+    <br>
+    <table class="table table-condensed table-hover">
+        <thead>
+            <tr>
+                <th>Produto</th>
+                <th>Estoque</th>
+            </tr>
+        </thead>
+        <tbody id="estoque">
+            {% for estoque in estoques %}
+                <tr class="row-produto">
+                    <td>{{ estoque.produto_nome }}</td>
+                    <td>
+                        <form action="" id="form-estoque">
+                            {{ errorField('estoque_quantidade') | raw }}
+                            <input type="text" name="estoque_quantidade" value="{{ estoque.estoque_quantidade }}" style="width: 45px;">
+                            <input type="hidden" name="id" value="{{ estoque.idProduto }}">
+                            <button class="btn btn-xs btn-primary btn-alterar-estoque">Alterar</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+        <tr>
+            <th colspan="4">{{ links | raw }}</th>
+        </tr>
+        </tfoot>
+    </table>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'layout_admin.html' %}
+{% block admin_content %}
+    {{ flash('mensagem_cliente') | raw }}
+    <h2>Lista de produtos</h2>
+    <div class="btn-group">
+        <a class="btn btn-default" href="#" role="button">Início</a>
+        <a class="btn btn-default" href="/adminClientes/create" role="button">Novo cliente</a>
+    </div>
+    <div>
+        <form action="/adminClientes">
+            <input type="text" name="s"  class="form-control" placeholder="Buscar Cliente">
+        </form>
+    </div>
+    <br>
+    <table class="table table-condensed table-hover">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Editar</th>
+                <th>Deletar</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr class="row-produto">
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.email }}</td>
+                    <td><a href="/adminClientes/edit/{{ user.id }}" class="btn btn-xs btn-info">Editar</a></td>
+                    <td><a href="/adminClientes/destroy/{{ user.id }}" class="btn btn-xs btn-danger">Deletar</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+        <tr>
+            <th colspan="4">{{ links | raw }}</th>
+        </tr>
+        </tfoot>
+    </table>
+{% endblock %}

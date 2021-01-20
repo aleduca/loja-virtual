@@ -1,0 +1,50 @@
+{% extends 'layout_admin.html' %}
+
+{% block admin_content %}
+    
+    <h2>Lista de produtos</h2>
+
+    <div class="btn-group">
+        <a class="btn btn-default" href="/painel" role="button">Início</a>
+    </div>
+
+    <div>
+        <form action="/adminVendas">
+            <input type="text" name="s"  class="form-control" placeholder="Buscar venda">
+        </form>
+    </div>
+
+    <br>
+
+    <table class="table table-condensed table-hover">
+        <thead>
+            <tr>
+                <th>Cliente</th>
+                <th>Produto</th>
+                <th>Quantidade</th>
+                <th>Valor</th>
+                <th>Total</th>
+                <th>Editar</th>
+                <th>Deletar</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for pedido in pedidos %}
+            <tr class="row-produto">
+                <td>{{ pedido.name }}</td>
+                <td>{{ pedido.produto_nome }}</td>
+                <td>{{ pedido.quantidade }}</td>
+                <td>R$ {{ pedido.valor | number_format(2,',','.')  }}</td>
+                <td>R$ {{ pedido.subtotal | number_format(2,',','.')  }}</td>
+                <td><a href="/adminVendas/edit/{{ pedido.idPedido }}" class="btn btn-xs btn-info">Editar</a></td>
+                <td><a href="/adminVendas/destroy/{{ pedido.idPedido }}" class="btn btn-xs btn-danger">Deletar</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4">{{ links | raw }}</td>
+            </tr>
+        </tfoot>
+    </table>
+{% endblock %}

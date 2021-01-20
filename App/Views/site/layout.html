@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head>
+        <title>{{ title }}</title>
+        
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta name="keywords" content=""/>
+        <meta name="description" content=""/>
+        <meta name="robots" content="index, follow" />
+        
+        <link rel="stylesheet" type="text/css" href="/assets/css/site/style.css" />
+    </head>
+    <body>
+        <div id="top">
+            {% include 'includes/top.html' %}
+        </div>
+        <div id="wrap-content">
+            <div id="breadcrumb">
+                {{ breadCrumb() | raw }}
+            </div>
+            <div id="main-content">
+                <div id="left-column">
+                    {% include 'includes/categories.html' %}
+                </div>
+                <div id="right-column">
+                    <div id="content">
+                        {% block site %}{% endblock %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="footer">
+            {% include 'includes/footer.html' %}
+        </div>
+        <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+        <script type="text/javascript" src="/assets/js/site/custom/carrinho.js"></script>
+        <script type="text/javascript" src="/assets/js/site/custom/frete.js"></script>
+        <script type="text/javascript" src="/assets/js/site/custom/avaliacoes.js"></script>
+        <script type="text/javascript" src="/bower_components/numeral/numeral.js"></script>
+        <script type="text/javascript" src="/bower_components/numeral/languages/pt-br.js"></script>
+        <script type="text/javascript" src="/assets/js/site/custom/language.js"></script>
+        <script type="text/javascript" src="/assets/js/site/custom/functions.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    </body>
+</html>

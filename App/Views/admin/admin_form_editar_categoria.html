@@ -1,0 +1,19 @@
+{% extends 'layout_admin.html' %}
+{% block admin_content %}
+    <h2>Atualizar Cliente</h2>
+    {{ flash('mensagem_categoria') | raw }}
+    
+    <form action="/adminCategorias/update/{{ categoria.id }}" method="POST" role="form">
+        
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <label for="Nome">Categoria</label>
+            {{ errorField('categoria_nome') | raw }}
+            <input type="text" name="categoria_nome" id="input" class="form-control" value="{{ categoria.categoria_nome }}"  title="">
+            <label for="Nome">Slug</label>
+            {{ errorField('categoria_slug') | raw }}
+            <input type="text" name="categoria_slug" id="input" class="form-control" value="{{ categoria.categoria_slug }}"  title="">
+        </div>
+        <div style="clear:both;"></div>
+        <button type="submit" class="btn btn-primary">Atualizar</button>
+    </form>
+{% endblock %}

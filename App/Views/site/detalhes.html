@@ -1,0 +1,201 @@
+{% extends 'layout.html' %}
+
+{% block site %}
+
+<div id="content">
+    <div id="wrap-product-info">
+        <div class="wrap-title-black">
+            <h1 class="nice-title">{{ produto.produto_nome }}</h1>
+            <div class="share-buttons">
+                <img src="/assets/images/share-buttons.png" alt="" style="margin-top: 7px;" />
+            </div>
+        </div>
+        <div id="product-content">
+            <div class="firstrow">
+                <div class="wrap-images">
+                    <div class="bigimage">
+                        <a href="#"><img src="{{ site_url() }}/{{ produto.produto_foto }}" alt="" /></a>
+                    </div>
+                    <div class="wrap-image-list">
+                        {% if fotos | length > 0 %}
+                        {% for foto in fotos %}
+                        <a href="#"><img src="{{site_url()}}/{{ foto.foto_thumb }}" alt="" /></a>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="wrap-product-short">
+                    <h2>{{ produto.produto_nome }}</h2>
+                    <div class="summary">
+                        <p>{{ produto.produto_descricao | nl2br }}</p>
+                    </div>
+                    <div class="wrap-special-info">
+                        <div class="left">
+                            <p>Classificar produto</p>
+                            <div class="wrap-rating">
+                                <ul class="star-rating">
+                                    <li><a href="#" title="1 star out of 5" class="one-star btn-avaliacao-estrelas" data-id="[1,{{ produto.id }}]">1</a></li>
+                                    <li><a href="#" title="2 stars out of 5" class="two-stars btn-avaliacao-estrelas" data-id="[2,{{ produto.id }}]">2</a></li>
+                                    <li><a href="#" title="3 stars out of 5" class="three-stars btn-avaliacao-estrelas" data-id="[3,{{ produto.id }}]">3</a></li>
+                                    <li><a href="#" title="4 stars out of 5" class="four-stars btn-avaliacao-estrelas" data-id="[4,{{ produto.id }}]">4</a></li>
+                                    <li><a href="#" title="5 stars out of 5" class="five-stars btn-avaliacao-estrelas" data-id="[5,{{ produto.id }}]">5</a></li>
+                                </ul>
+                                <div class="rating-summary">{{ avaliacao }}.0</div>
+                            </div>
+                            <p>O que achou do produto? <button class="btn btn-success btn-xs">Enviar opinião</button></p>
+                            <p><a href="/avaliacoes/{{ produto.produto_slug }}">Ver avaliações({{ avaliacoes(produto.id).totalAvaliacoes }})</a></p>
+                            <p class="dotted">Em estoque
+                                {% if estoque(produto.id) > 0 %}
+                                <span>({{ estoque(produto.id) }})</span>
+                                {% else %}
+                                <span style='color:red;'>Produto indisponível</span>
+                                {% endif %}
+                            </p>
+                            <p>Entrega <span>Fácil e rápido</span></p>
+                        </div>
+                        <div class="right">
+                            <div class="add-product-cart">
+                                <div class="oldprice">
+                                    <div class="l">Valor antigo</div><div class="r">
+                                        R$
+                                        {% if(produto.produto_promocao) == 1 %}
+                                        {{ produto.produto_valor | number_format(2,',','.') }}
+                                        {% else %}
+                                        0,00
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="oldprice"><div class="l">Você vai economizar</div>
+                                    <div class="r">
+                                        R$
+                                        {% if(produto.produto_promocao) == 1 %}
+                                        {% set valor = produto.produto_valor - produto.produto_valor_promocao %}
+                                        {{ valor | number_format(2,',','.') }}  
+                                        {% else %}
+                                        0,00
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="currentprice"><div class="l">Valor:</div>
+                                    <div class="r">
+
+                                        {% if(produto.produto_promocao) == 1 %}
+                                        {{ produto.produto_valor_promocao | number_format(2,',','.') }}
+                                        {% else %}
+                                        {{ produto.produto_valor | number_format(2,',','.') }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <form method="post" action="">
+                                    <div class="add-quantity">
+                                        <input class="nice-s addcart" type="submit" data-id="{{ produto.id }}" name="product-quantity-submit" value="ADD CARRINHO" />
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="secondrow">
+                <div class="wrap-tabs">
+                    <div class="tabs">
+                        <a id="tab1" href="#" class="active">Descrição</a>
+                        <a id="tab2" href="#">Detalhes</a>
+                        <a id="tab3" href="#">Garantia</a>
+                        <a id="tab4" href="#">Avaliações</a>
+                    </div>
+                    <!--dados da descricao vao ser cadastrados com um editor como tinymce, entao ja virao formatados-->
+                    <div class="wrap-tabs-content">
+                        <div id="tab1-content">
+                            <ul class="detailsList">
+                                <li>
+                                    <span>2nd generation Intel® Core™ i5-2430M Processor ( 2.40GHz 1333MHz 3MB )</span>
+                                </li>
+                                <li class="itemDetailsFeatureRow1">
+                                    <span><nobr>Genuine</nobr> Windows 7 Home Premium 64</span>
+                                </li>
+                                <li>
+                                    <span>Intel Integrated HD Graphics 3000</span>
+                                </li>
+                                <li class="itemDetailsFeatureRow1">
+                                    <span>4 GB PC3-10600 DDR3 SDRAM 1333MHz</span>
+                                </li>
+                                <li>
+                                    <span>15.6" HD Glossy with integrated camera 1366x768</span>
+                                </li>
+                                <li class="itemDetailsFeatureRow1">
+                                    <span>Integrated 0.3MP Camera</span>
+                                </li>
+                                <li>
+                                    <span>Industry Standard Touchpad</span>
+                                </li>
+                                <li class="itemDetailsFeatureRow1 itemDetailsFeatureValue">
+                                    <span>750GB 5400</span>
+                                </li>
+                                <li>
+                                    <span>DVD Recordable (Dual Layer)</span>
+                                </li>
+                                <li class="itemDetailsFeatureRow1">
+                                    <span>6 Cell Lithium-Ion</span>
+                                </li>
+                                <li>
+                                    <span>Lenovo BGN Wireless</span>
+                                </li>
+                                <li class="itemDetailsFeatureRow1">
+                                    <span>HDMI (Out)</span>
+                                </li>
+                                <li>
+                                    <span>Fingerprint Reader</span>
+                                </li>
+                                <li class="itemDetailsFeatureRow1">
+                                    <span>One Year</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="tab2-content" style="display:none;"><p>{{ produto.produto_descricao | raw | nl2br }}</p></div>
+                        <div id="tab3-content" style="display:none;"><p>{{ produto.produto_garantia }}</p></div>
+                        <div id="tab4-content" style="display:none;">
+
+                            {% if avaliacoes | length <= 0 %}
+                            Nenhuma avaliação para esse produto
+                            {% endif %}
+
+                            {% for avaliacao in avaliacoes %}
+                            <b>{{ avaliacao.name }} escreveu({{ avaliacao.avaliacaoCreated | date('d/m/Y H:i:s')}}) : </b>
+                            {{ avaliacao.avaliacao_mensagem }}
+                            <hr />
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+                <div class="wrap-related">
+                    <h3>Produtos Relacionados</h3>
+                    {% for relacionado in relacionados %}
+                    <ul id="related-products-nav">
+
+                        <li>
+                            <div class="image">
+                                <a href="#"><img src="/{{ relacionado.produto_foto }}" alt="" /></a>
+                            </div>
+                            <div class="info">
+                                <h4><a href="/detalhes/{{ relacionado.produto_slug }}">{{ relacionado.produto_nome }}</a></h4>
+                                <br />
+                                {% if(relacionado.produto_promocao) == 1 %}
+                                Valor Antigo: <span class='promocao'>R$ {{ relacionado.produto_valor | number_format(2,',','.') }}
+                                </span><br />
+                                Valor: R$ {{ relacionado.produto_valor_promocao | number_format(2,',','.') }}
+                                {% else %}
+                                <div style="clear:both;"></div>
+                                Valor: R$ {{ relacionado.produto_valor | number_format(2,',','.') }}
+                                {% endif %}
+                            </div>
+                        </li>
+                    </ul>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

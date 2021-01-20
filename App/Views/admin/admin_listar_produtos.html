@@ -1,0 +1,103 @@
+{% extends 'layout_admin.html' %}
+
+{% block admin_content %}
+    
+    <h2>Lista de produtos</h2>
+
+    <div class="btn-group">
+        <a class="btn btn-default" href="#" role="button">Início</a>
+        <a class="btn btn-default" href="/adminProdutos/create" role="button">Novo produto</a>
+    </div>
+
+
+    <div>
+        <form action="/adminProdutos">
+            <input type="text" name="s"  class="form-control" placeholder="Buscar produto">
+        </form>
+    </div>
+
+    <br>
+
+    <table class="table table-condensed table-hover">
+        <thead>
+            <tr>
+                <th>Produto</th>
+                <th>Capa</th>
+                <th>Promoção</th>
+                <th>Presente</th>
+                <th>Destaque</th>
+                <th>Editar</th>
+                <th>Deletar</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for produto in produtos %}
+            <tr class="row-produto">
+                <td>{{ produto.produto_nome }}</td>
+                <td>
+                    {% if fileExists(produto.produto_foto) %}
+                        <img src="/{{ produto.produto_foto }}" class="img-thumbnail" width="40" alt="">
+                    {% else %}
+                        <img src="/assets/images/no-thumbnail.png" class="img-rounded" alt="">
+                    {% endif %}
+                    <a href="/adminCapaProduto/{{ produto.id }}" class="btn btn-xs btn-default">Nova Capa</a>
+                </td>
+                <td>
+                    {% if produto.produto_promocao == 1 %}
+                        <button type="button" class="btn btn-xs btn-danger btn-tirar-promocao" data-id="{{ produto.id }}">Tirar da promocao</button>
+                    {% endif %}
+                        <button type="button" class="btn btn-xs btn-success btn-promocao" data-id="{{ produto.id }}">Promoção</button>
+                </td>
+                <td>
+                    <div class="checkbox">
+                        <label>
+                            {% if produto.produto_presente == 1 %}
+                                {% set presente = "checked='checked'" %}
+                            {% else %}    
+                                {% set presente = '' %}
+                            {% endif %}
+                            <input type="checkbox" {{ presente }} data-id="{{ produto.id }}" class="produto-presente">
+                        </label>
+                    </div>
+                </td>
+                <td>
+                    <div class="checkbox">
+                        <label>
+                        {% if produto.produto_destaque == 1 %}
+                            {% set destaque = "checked='checked'" %}
+                        {% else %}    
+                            {% set destaque = '' %}
+                        {% endif %}
+                            <input type="checkbox" {{ destaque }} data-id="{{ produto.idProduto }}" class="produto-destaque" name="produto_destaque">
+                        </label>
+                    </div>
+                </td>
+                <td><a href="/adminProdutos/edit/{{ produto.idProduto }}" class="btn btn-xs btn-info">Editar</a></td>
+                <td><a href="/adminProdutos/destroy/{{ produto.idProduto }}" class="btn btn-xs btn-danger">Deletar</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4">{{ links | raw }}</td>
+            </tr>
+        </tfoot>
+    </table>
+
+<div class="modal fade" id="modal-capa-produto">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Capa para o produto</h4>
+            </div>
+            <div class="modal-body">
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

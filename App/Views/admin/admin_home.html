@@ -1,0 +1,165 @@
+{% extends "layout_admin.html" %}
+
+{% block admin_content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="orange">
+                    <i class="material-icons">shopping_cart</i>
+                </div>
+                <div class="card-content">
+                    <p class="category">Vendas Total</p>
+                    <h3 class="title">R$ {{ totalVendas.totalPedidos | number_format(2,',','.') }}</h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons text-danger">date_range</i> <a href="/adminVendasTotal">Ver total Vendas</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="green">
+                    <i class="material-icons">shopping_cart</i>
+                </div>
+                <div class="card-content">
+                    <p class="category">Vendas do Mês</p>
+                    <h3 class="title">R$ {{ totalVendasMes.totalPedidos | number_format(2,',','.') }}</h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons text-danger">date_range</i> <a href="/adminVendasMes">Ver Vendas Mes</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="red">
+                    <i class="material-icons">account_box</i>
+                </div>
+                <div class="card-content">
+                    <p class="category">Clientes Cadastrados</p>
+                    <h3 class="title">{{ totalUsers }}</h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons">local_offer</i> <a href="">Ver clientes cadastrados</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header" data-background-color="blue">
+                    <i class="material-icons">beenhere</i>
+                </div>
+                <div class="card-content">
+                    <p class="category">Online</p>
+                    <h3 class="title">{{ totalUsersOnline }}</h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons">update</i>Usuários online no portal
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header card-chart" data-background-color="green">
+                    <div class="ct-chart" id="dailySalesChart"></div>
+                </div>
+                <div class="card-content">
+                    <h4 class="title">Vendas do Mês</h4>
+                    <p class="category"><i class="material-icons text-danger">date_range</i><a href="">Ver as vendas do mês</a></p>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6 col-md-12">
+            <div class="card card-nav-tabs">
+                <div class="card-header" data-background-color="purple">
+                    <div class="nav-tabs-navigation">
+                        <div class="nav-tabs-wrapper">
+                            <span class="nav-tabs-title"></span>
+                            <ul class="nav nav-tabs" data-tabs="tabs">
+                                <li class="active">
+                                    <a href="#profile" data-toggle="tab">
+                                        <i class="material-icons">local_atm</i>
+                                        Últimas Vendas
+                                    <div class="ripple-container"></div></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-content">
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="profile">
+                            <table class="table">
+                            <thead class="text-danger">
+                                <th>Produto</th>
+                                <th>Quantidade</th>
+                                <th>Cliente</th>
+                                <th>Valor</th>
+                            </thead>
+                                <tbody>
+                                {% for venda in listaVendas %}
+                                    <tr>
+                                        <td><a href="/adminProduto/{{ venda.idProduto }}" style="text-decoration:none;color:#000;">{{ venda.produto_nome }}</a></td>
+                                        <td>{{ venda.quantidade }}</td>
+                                        <td>{{ venda.name }}</td>
+                                        <td>R$ {{ venda.valor | number_format(2,',','.') }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-md-12">
+            <div class="card">
+                <div class="card-header" data-background-color="orange">
+                    <h4 class="title">Últimos Clientes Cadastrados</h4>
+                    <p class="category">Abaixo a lista dos últimos clientes cadastrados na loja</p>
+                </div>
+                <div class="card-content table-responsive">
+                    <table class="table table-hover">
+                        <thead class="text-warning">
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Email</th>
+                        </thead>
+                        <tbody>
+                        {% for cliente in ultimosClientes %}
+                            <tr>
+                                <td>{{ cliente.id }}</td>
+                                <td>{{ cliente.name }}</td>
+                                <td>{{ cliente.email }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

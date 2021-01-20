@@ -1,0 +1,54 @@
+{% extends "layout_admin.html" %}
+
+{% block admin_content %}
+    
+<h2>Lista de Vendas</h2>
+    
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="card">
+                <div class="card-header" data-background-color="purple">
+                    <h4 class="title">Total Vendas</h4>
+                    <p class="category">Lista da vendas do portal</p>
+                </div>
+                <div class="card-content table-responsive">
+                    <table class="table">
+                        <thead class="text-primary">
+                            <th>Cliente</th>
+                            <th>Frete</th>
+                            <th>Total</th>
+                            <th>Data</th>
+                            <th></th>
+                        </thead>
+                        <tbody>
+                        {% set total = 0 %}
+                        {% for pedido in pedidos %}
+                        {% set total = total + pedido.total %}
+                            <tr>
+                                <td>{{ pedido.name }}</td>
+                                <td>R$ {{ pedido.pedido_frete | number_format(2,',','.') }}</td>
+                                <td>R$ {{ pedido.total | number_format(2,',','.') }}</td>
+                                <td>{{ pedido.createdAt | date('d/m/Y') }}</td>
+                                <td>
+                                    <a href="#" data-id="{{ pedido.idPedido }}" class="btn-ver-produtos-pedido">Ver Produtos</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="5">
+                                    Total: R$ {{ total | number_format(2,',','.')  }}
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        
+{% endblock %}

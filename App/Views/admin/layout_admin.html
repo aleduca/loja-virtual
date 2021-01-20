@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png" />
+    <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>{{ titulo }}</title>
+
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+
+    <!-- Bootstrap core CSS     -->
+    <link href="{{ site_url() }}/assets/css/admin/bootstrap.min.css" rel="stylesheet" />
+
+   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css"> 
+
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/min/dropzone.min.css">
+
+    <!--  Material Dashboard CSS    -->
+    <link href="{{ site_url() }}/assets/css/admin/material-dashboard.css" rel="stylesheet"/>
+
+    <!--     Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <div class="sidebar" data-color="purple" data-image="../assets/img/sidebar-1.jpg">
+
+            <div class="logo">
+                <a href="http://www.creative-tim.com" class="simple-text">
+                    Minha Loja
+                </a>
+            </div>
+
+            <div class="sidebar-wrapper">
+               {% include 'includes_admin/sidebar.html'%} 
+            </div>
+        </div>
+
+        <div class="main-panel">
+            <nav class="navbar navbar-transparent navbar-absolute">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">Bem Vindo {{ user().name }} {{ user().sobrenome }}</a>
+                    </div>
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a href="/painel" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="material-icons">dashboard</i>
+                                    <p class="hidden-lg hidden-md">Dashboard</p>
+                                </a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="material-icons">person</i>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#"><i class="fa fa-cog" aria-hidden="true"></i> 
+                                    Detalhes da conta</a></li>
+                                    <li><a href="/adminLogin/destroy"><i class="fa fa-sign-out" aria-hidden="true"></i> 
+                                    Logout</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="content">
+                {% block admin_content %}
+                {% endblock %}
+            </div>
+
+            <footer class="footer">
+                {% include 'includes_admin/footer.html' %}
+            </footer>
+        </div>
+    </div>
+
+</body>
+
+    <!--   Core JS Files   -->
+    <script src="{{ site_url() }}/assets/js/admin/jquery-3.1.0.min.js" type="text/javascript"></script>
+    <script src="{{ site_url() }}/assets/js/admin/bootstrap.min.js" type="text/javascript"></script>
+    <script src="{{ site_url() }}/assets/js/admin/material.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="{{ site_url() }}/bower_components/numeral/numeral.js"></script>
+    <script type="text/javascript" src="{{ site_url() }}/bower_components/numeral/languages/pt-br.js"></script>
+    <!--  Charts Plugin -->
+    <script src="{{ site_url() }}/assets/js/admin/chartist.min.js"></script>
+
+    <!-- Material Dashboard javascript methods -->
+    <script src="{{ site_url() }}/assets/js/admin/material-dashboard.js"></script>
+
+    <!-- Material Dashboard DEMO methods, don't include it in your project! -->
+    <script src="{{ site_url() }}/assets/js/admin/custom/charts.js"></script>
+
+   <script src="//cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script> 
+
+    <script src="{{ site_url() }}/assets/js/admin/custom/produtos_promocao.js"></script>
+    
+    <script src="{{ site_url() }}/assets/js/admin/custom/produtos_destaque.js"></script>
+
+    <script src="{{ site_url() }}/assets/js/admin/custom/produtos_presente.js"></script>
+
+    <script src="{{ site_url() }}/assets/js/admin/custom/pedidos.js"></script>
+
+    <script src="{{ site_url() }}/assets/js/admin/custom/estoque.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            charts.initDashboard();
+        });
+    </script>
+
+</html>

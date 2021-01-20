@@ -1,0 +1,69 @@
+{% extends 'layout.html' %}
+
+{% block site %}
+
+<div id="content">
+    <div id="wrap-featured-products">
+        <div class="wrap-title-black">
+            <h1 class="nice-title">PRODUTOS EM DESTAQUE</h1>
+        </div>
+        {% for produto in produtos %}
+        <ul id="inline-product-list">
+            <li>
+                <div class="product-photo"><a href="#">
+                        <img src="{{ site_url() }}/{{ produto.produto_foto }}" alt="" /></a>
+                </div>
+                <div class="product-info">
+                    <h3><a href="/detalhes/{{ produto.produto_slug }}">{{ produto.produto_nome }}</a></h3>
+                    <p>
+                        Categoria {{ produto.categoria_nome }} | Marca {{ produto.marca_nome }}<br/>
+
+                        {% if estoque(produto.idProduto) >0 %}
+                        Quantidade em estoque: ({{ estoque(produto.idProduto) }})
+                        {% else %}
+                        <span style='color:red;'>Produto indisponível</span>
+                        {% endif %}
+
+                        <br />
+                        <br/>
+                        <a href="/detalhes/{{ produto.produto_slug }}">Detalhes</a>
+                    </p>
+                </div>
+                <div class="product-reviews">
+                    {% set avaliacoes = avaliacoes(produto.idProduto).totalAvaliacoes %}
+                    {{ estrelas(produto.idProduto) | raw }}
+                    <p>Total de avaliacoes:{{ avaliacoes }}</p>
+                    <p><a href="/avaliacoes/{{ produto.produto_slug }}">Ver avaliações({{ avaliacoes }})</a></p>
+                    <div class="esta-no-carrinho">
+                        {% if(estaNoCarrinho(produto.idProduto)) %}
+                        <p class="esta-no-carrinho">
+                              <i class="fa fa-shopping-cart"></i> produto está no carrinho
+                        </p>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="product-price"> 
+                    <p>
+                        {% if(produto.produto_promocao) == 1 %}
+                        <span class='promocao'>
+                            R$ {{ produto.produto_valor | number_format(2,',','.') }}
+                        </span><br />
+                        R$ {{ produto.produto_valor_promocao | number_format(2,',','.') }}
+                        {% else %}
+                        R$ {{ produto.produto_valor | number_format(2,',','.') }}
+                        {% endif %}
+                    </p>
+                    <p><a href="#" class="nice-a addcart" data-id="{{ produto.idProduto }}">ADD CARRINHO</a></p>
+                </div>
+            </li>
+
+        </ul>
+        {% endfor %}
+
+    </div>
+</div>
+
+
+
+{% endblock %}

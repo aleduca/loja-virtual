@@ -1,0 +1,28 @@
+{% extends 'layout_admin.html' %}
+
+{% block admin_content %}
+
+<h2>Atualizar Venda do produto {{ produto.produto_nome }}</h2>
+
+{{ flash('message') | raw }}
+    
+<form action="/adminVendas/update/{{ pedido.id }}" method="POST" role="form">
+    
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <label for="Nome">Quantidade</label>
+        {{ errorField('quantidade') | raw }}
+        <input type="text" name="quantidade" id="input" class="form-control" value="{{ pedido.quantidade }}">
+        <label for="Nome">Valor</label>
+        {{ errorField('valor') | raw }}
+        <input type="text" name="valor" id="input" class="form-control" value="{{ pedido.valor }}"  title="">
+        <label for="Nome">SubTotal</label>
+        {{ errorField('subtotal') | raw }}
+        <input type="text" name="subtotal" id="input" class="form-control" value="{{ pedido.subtotal }}"  title="">
+    </div>
+
+    <div style="clear:both;"></div>
+    
+    <button type="submit" class="btn btn-primary">Atualizar</button>
+</form>
+
+{% endblock %}

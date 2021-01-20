@@ -1,0 +1,49 @@
+<div id="wrap-user-border">
+    <div id="wrap-user-border2">
+      <div id="wrap-user">
+        <div id="user-message">Good morning <strong>Guest</strong></div>
+        <ul id="user-menu">
+          <li><a href="#">Cadastre-se</a></li>
+          <li><a href="#">Minha conta</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div id="header">
+    <div id="header-top">
+      <div id="wrap-logo">
+        <a href="1_homepage.html"><img src="/assets/images/site/logo.png" alt="" /></a>
+      </div>
+      <div id="wrap-header-info">
+        <div id="cart">
+          <div id="cart-title">CARRINHO DE COMPRAS</div>
+          <div id="cart-summarry">
+           <a href="#" class="items">{{ numeroProdutosCarrinho() | length }} items</a> 
+           Valor <span class="price">
+               R$ {{ valorProdutosCarrinho() | number_format(2,',','.') }}
+           </span>
+          </div>
+        </div>
+        <div id="work-hours">
+          <div class="white-line">Para contato ligue para <strong>01-2345-6789</strong></div>
+          <div class="pink-line">De segunda a sexta das 09:00 as 18:00</div>
+        </div>
+      </div>
+    </div>
+    <div id="header-bottom">
+      <ul id="header-menu">
+        <li><a href="/" class="active">HOME</a></li>
+        <li><a href="1_homepage.html" class="inactive special">PROMOÇÕES</a></li>
+        <li><a href="1_homepage.html" class="inactive">COMO COMPRAR?</a></li>
+        <li><a href="2_homepage.html" class="inactive">COMO VOU PAGAR?</a></li>
+        <li><a href="1_homepage.html" class="inactive">DÚVIDAS</a></li>
+        <li><a href="2_homepage.html" class="inactive">CONTATO</a></li>
+      </ul>
+      <div id="search">
+        <form id="search-form" action="/home" method="post">
+          <div style="float: left;"><input class="nice_search" type="text" name="s" value="Buscar produto..." /></div>
+          <div style="float: left;"><input class="nice_submit" type="submit" name="submit_search" value="" /></div>
+        </form>
+      </div>
+    </div>
+  </div>

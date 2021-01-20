@@ -1,0 +1,33 @@
+{% extends 'layout_admin.html' %}
+
+{% block admin_content %}
+
+<h2>Alterar capa do produto {{ produto.produto_nome }}</h2>
+
+<form action="/adminCapaProduto/store"
+      class="dropzone"
+      id="capaproduto">
+      <input type="hidden" id="id_produto" value="{{ produto.id }}">
+</form>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/min/dropzone.min.js"></script>
+
+<script>
+    Dropzone.options.capaproduto = {
+          paramName: "file", // The name that will be used to transfer the file
+          maxFilesize: 1, // MB
+          maxFiles:1,
+          acceptedFiles:'.jpg, .png',
+          sending: function(file, xhr, formData){
+            var id = document.querySelector('#id_produto').value;
+            formData.append('id_produto', id);
+          },
+          success: function(file, response){
+           if(response == 'updated'){
+                swal('Atualizado','Capa foi atualizada','success');
+           }
+         }
+    };
+</script>
+
+{% endblock %}

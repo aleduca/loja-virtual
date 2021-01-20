@@ -1,0 +1,25 @@
+{% extends 'layout_admin.html' %}
+
+{% block admin_content %}
+
+<h2>Cadastrar Cliente</h2>
+
+{{ flash('message') | raw }}
+    
+<form action="/adminCategorias/store" method="POST" role="form">
+    
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <label for="Nome">Nome</label>
+        {{ errorField('categoria_nome') | raw }}
+        <input type="text" name="categoria_nome" class="form-control" value=""  title="">
+
+        <label for="Nome">Slug</label>
+        {{ errorField('categoria_slug') | raw }}
+        <input type="text" name="categoria_slug" class="form-control" value=""  title="">
+
+    </div>
+    <div style="clear:both;"></div>
+    <button type="submit" class="btn btn-primary">Cadastrar</button>
+</form>
+
+{% endblock %}

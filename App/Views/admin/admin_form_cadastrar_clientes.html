@@ -1,0 +1,67 @@
+{% extends 'layout_admin.html' %}
+
+{% block admin_content %}
+
+<h2>Cadastrar Cliente</h2>
+
+{{ flash('mensagem_cliente') | raw }}
+    
+<form action="/adminClientes/store" method="POST" role="form">
+    
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <label for="Nome">Nome</label>
+        {{ errorField('name') | raw }}
+        <input type="text" name="name" id="input" class="form-control" value=""  title="">
+
+        <label for="Nome">Sobrenome</label>
+        {{ errorField('sobrenome') | raw }}
+        <input type="text" name="sobrenome" id="input" class="form-control" value=""  title="">
+
+        <label for="Nome">Email</label>
+        {{ errorField('email') | raw }}
+        <input type="text" name="email" id="input" class="form-control" value=""  title="">
+    </div>
+
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <label for="Nome">Cep</label>
+        {{ errorField('cep') | raw }}
+        <input type="text" name="cep" id="input" class="form-control" value=""  title="">
+
+        <label for="Nome">Cidade</label>
+        {{ errorField('cidade') | raw }}
+        <input type="text" name="cidade" id="input" class="form-control" value=""  title="">
+
+        <label for="Nome">Endereço</label>
+        {{ errorField('endereco') | raw }}
+        <input type="text" name="endereco" id="input" class="form-control" value=""  title="">
+    </div>
+
+ <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+     <label for="Nome">Bairro</label>
+     {{ errorField('bairro') | raw }}
+     <input type="text" name="bairro" id="input" class="form-control" value=""  title="">
+
+     <label for="Nome">Estado</label>
+     {{ errorField('estado') | raw }}
+     <input type="text" name="estado" id="input" class="form-control" value=""  title="">
+
+     <label for="Nome">Password</label>
+     {{ errorField('password') | raw }}
+     <input type="text" name="password" id="input" class="form-control" value=""  title="">
+ </div>
+
+
+ <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+     <label for="Nome">DDD</label>
+     {{ errorField('ddd') | raw }}
+     <input type="text" name="ddd" id="input" class="form-control" value=""  title="">
+
+     <label for="Nome">Telefone</label>
+     {{ errorField('telefone') | raw }}
+     <input type="text" name="telefone" id="input" class="form-control" value=""  title="">
+ </div>
+    <div style="clear:both;"></div>
+    <button type="submit" class="btn btn-primary">Cadastrar</button>
+</form>
+
+{% endblock %}
